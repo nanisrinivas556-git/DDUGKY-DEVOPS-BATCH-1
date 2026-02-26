@@ -94,3 +94,85 @@ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 yum install git maven jenkins -y
 systemctl start jenkins
 systemctl status jenkins
+
+
+
+
+PIPELINE:-
+
+passs
+pipeline agent any stages stage and steps
+
+pipeline {
+    agent any
+    
+    stages {
+        stage ("stage-1") {
+            steps {
+                sh 'touch file1 file2'
+                sh 'pwd'
+                sh 'mkdir d1'
+            }
+        }
+    }
+}
+
+
+pipeline {
+    agent any
+    
+    stages {
+        stage ('checkout') {
+            steps {
+                git url : 'https://github.com/nit8ambatch/Devops-batch123.git'
+            }
+        }
+        stage ('commands') {
+            steps {
+                sh '''
+                touch abc.txt
+                df -h
+                '''
+            }
+        }
+    }
+}
+
+
+pipeline {
+    agent any
+   
+    stages{
+        stage ('Bash script'){
+            steps {
+                sh '''
+                #!/bin/bash
+
+                # Set the CPU usage threshold (in percentage)
+                THRESHOLD=80
+                # Get the current CPU usage (ignoring the first line)
+                CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}')
+                # Display CPU usage
+                echo "Current CPU Usage: ${CPU_USAGE}%"
+                # Check if CPU usage exceeds the threshold
+                if (( $(echo "$CPU_USAGE > $THRESHOLD" | bc -l) )); then
+                    echo "WARNING: CPU usage is above ${THRESHOLD}%!"
+                fi
+                '''
+            }
+        }
+    }    
+}  
+
+
+pipeline {
+    agent any 
+    
+    stages{
+        stage('checkout') {
+            steps {
+              git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+    }
+}
