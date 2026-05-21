@@ -1,0 +1,5 @@
+apt update
+  apt upgrade
+apt install docker.io -y
+systemctl start docekr
+systemctl status docker 
